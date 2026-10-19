@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Portal de Clientes</title>
+
+    <link rel="stylesheet" href="/style.css">
+
+    <script src="/app.js" defer></script>
+</head>
+
+<body>
+    <header class="cabecalho">
+        <div class="container barra">
+            <a class="marca" href="/">
+                <span class="marca-icone" aria-hidden="true">C</span>
+
+                <span>
+                    Portal de Clientes
+                    <small>Gerenciamento de contatos</small>
+                </span>
+            </a>
+
+            <span class="selo">Demonstração</span>
+        </div>
+    </header>
+
+    <main class="container">
+        <nav class="navegacao" aria-label="Menu principal">
+            <button
+                id="menu-consulta"
+                class="aba ativa"
+                type="button"
+                aria-current="page"
+            >
+                Clientes
+            </button>
+
+            <button
+                id="menu-cadastro"
+                class="aba"
+                type="button"
+            >
+                Novo cliente
+            </button>
+        </nav>
+
+        <div
+            id="mensagem"
+            class="mensagem"
+            role="status"
+            hidden
+        ></div>
+
+        <!-- TELA DE CONSULTA -->
+        <section
+            id="tela-consulta"
+            aria-labelledby="titulo-consulta"
+        >
+            <div class="titulo-pagina">
+                <div>
+                    <p class="sobretitulo">CONTATOS</p>
+
+                    <h1 id="titulo-consulta" tabindex="-1">
+                        Clientes
+                    </h1>
+
+                    <p class="texto-suave">
+                        Consulte e organize seus contatos.
+                    </p>
+                </div>
+
+                <button
+                    id="botao-novo"
+                    class="botao primario"
+                    type="button"
+                >
+                    + Novo cliente
+                </button>
+            </div>
+
+            <div class="resumo">
+                <article class="cartao-resumo">
+                    <span class="texto-suave">
+                        Clientes cadastrados
+                    </span>
+
+                    <strong id="total-clientes">0</strong>
+                </article>
+
+                <article class="cartao-resumo">
+                    <span class="texto-suave">
+                        Clientes com telefone
+                    </span>
+
+                    <strong id="total-telefones">0</strong>
+                </article>
+            </div>
+
+            <div class="painel">
+                <div class="barra-pesquisa">
+                    <div class="campo">
+                        <label for="pesquisa">
+                            Pesquisar clientes
+                        </label>
+
+                        <input
+                            id="pesquisa"
+                            type="search"
+                            placeholder="Nome, email ou telefone"
+                        >
+                    </div>
+
+                    <span
+                        id="quantidade-resultados"
+                        class="texto-suave"
+                        role="status"
+                    ></span>
+                </div>
+
+                <div class="tabela-container">
+                    <table>
+                        <caption class="somente-leitor">
+                            Lista demonstrativa de clientes
+                        </caption>
+
+                        <thead>
+                            <tr>
+                                <th scope="col">Código</th>
+                                <th scope="col">Nome</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Telefone</th>
+                                <th scope="col">Ações</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="lista-clientes"></tbody>
+                    </table>
+                </div>
+
+                <div id="estado-vazio" class="estado-vazio" hidden>
+                    <strong>Nenhum cliente encontrado</strong>
+
+                    <p>
+                        Tente pesquisar utilizando outro termo.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- TELA DE CADASTRO / EDIÇÃO -->
+        <section
+            id="tela-formulario"
+            aria-labelledby="titulo-formulario"
+            hidden
+        >
+            <div class="titulo-pagina">
+                <div>
+                    <p class="sobretitulo">CONTATOS</p>
+
+                    <h1 id="titulo-formulario" tabindex="-1">
+                        Novo cliente
+                    </h1>
+
+                    <p class="texto-suave">
+                        Preencha os dados do cliente.
+                    </p>
+                </div>
+
+                <button
+                    id="botao-voltar"
+                    class="botao secundario"
+                    type="button"
+                >
+                    Voltar para consulta
+                </button>
+            </div>
+
+            <form id="formulario-cliente" class="painel formulario">
+                <div class="secao-formulario">
+                    <h2>Dados do cliente</h2>
+
+                    <p class="texto-suave">
+                        Os campos com * são obrigatórios.
+                    </p>
+                </div>
+
+                <input id="cliente-id" type="hidden">
+
+                <div class="grade-formulario">
+                    <div class="campo largura-total">
+                        <label for="nome">Nome completo *</label>
+
+                        <input
+                            id="nome"
+                            name="nome"
+                            type="text"
+                            placeholder="Ex.: Ana Paula"
+                            autocomplete="name"
+                            required
+                        >
+                    </div>
+
+                    <div class="campo">
+                        <label for="email">Email *</label>
+
+                        <input
+                            id="email"
+                            name="email"
+                            type="email"
+                            placeholder="Ex.: ana@email.com"
+                            autocomplete="email"
+                            required
+                        >
+                    </div>
+
+                    <div class="campo">
+                        <label for="telefone">Telefone</label>
+
+                        <input
+                            id="telefone"
+                            name="telefone"
+                            type="tel"
+                            placeholder="Ex.: (21) 99999-0001"
+                            autocomplete="tel"
+                        >
+                    </div>
+                </div>
+
+                <div class="acoes-formulario">
+                    <button
+                        id="botao-cancelar"
+                        class="botao secundario"
+                        type="button"
+                    >
+                        Cancelar
+                    </button>
+
+                    <button
+                        id="botao-salvar"
+                        class="botao primario"
+                        type="submit"
+                    >
+                        Salvar cliente
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <footer class="rodape">
+            Protótipo visual • Dados demonstrativos
+        </footer>
+    </main>
+
+    <!-- CONFIRMAÇÃO DE EXCLUSÃO -->
+    <dialog
+        id="modal-exclusao"
+        aria-labelledby="titulo-exclusao"
+        aria-describedby="descricao-exclusao"
+    >
+        <div class="conteudo-modal">
+            <span class="icone-alerta" aria-hidden="true">!</span>
+
+            <h2 id="titulo-exclusao">Excluir cliente?</h2>
+
+            <p id="descricao-exclusao">
+                Deseja excluir
+                <strong id="nome-exclusao"></strong>?
+            </p>
+
+            <p class="texto-suave">
+                Nesta demonstração, nenhum dado será excluído.
+            </p>
+
+            <div class="acoes-modal">
+                <button
+                    id="cancelar-exclusao"
+                    class="botao secundario"
+                    type="button"
+                    autofocus
+                >
+                    Cancelar
+                </button>
+
+                <button
+                    id="confirmar-exclusao"
+                    class="botao perigo"
+                    type="button"
+                >
+                    Confirmar exclusão
+                </button>
+            </div>
+        </div>
+    </dialog>
+</body>
+</html>

@@ -1,0 +1,25 @@
+{
+  "name": "api-clientes",
+  "version": "1.0.0",
+  "description": "Aula DevOps",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/millermvs/api-clientes.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/millermvs/api-clientes/issues"
+  },
+  "homepage": "https://github.com/millermvs/api-clientes#readme",
+  "dependencies": {
+    "express": "^5.2.1",
+    "swagger-ui-express": "^5.0.1"
+  }
+}

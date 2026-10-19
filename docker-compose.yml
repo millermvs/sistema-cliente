@@ -1,0 +1,31 @@
+name: sistema-clientes
+
+services:
+
+  # API CLIENTES
+  api-clientes:
+    build:
+      context: ./api-clientes # Raiz do projeto
+      dockerfile: Dockerfile # Arquivo que gera a imagem
+    image: api-clientes:1.0.0 # Nome da imagem
+    ports:
+      - "3000:3000" # porta externa : porta interna
+    networks:
+      - rede-clientes # rede interna no docker
+    restart: unless-stopped # reinicia o container automaticamente
+
+  # WEB CLIENTES
+  web-clientes:
+    build:
+      context: ./web-clientes # Raiz do projeto
+      dockerfile: Dockerfile # Arquivo que gera a imagem
+    image: web-clientes:1.0.0 # Nome da imagem
+    ports:
+      - "8001:8001" # porta externa : porta interna
+    networks:
+      - rede-clientes # rede interna no docker
+    restart: unless-stopped # reinicia o container automaticamente
+
+networks:
+  rede-clientes: # rede interna no docker
+    driver: bridge # rede compartilhada
